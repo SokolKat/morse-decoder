@@ -38,7 +38,30 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+// convert the input code to morse code
+expr = expr.replace(/10/g, '.').replace(/11/g, '-').replace(/0/g, '');
+// split the morse code into an array of letters
+const codeArray = expr.split("**********");
+// create a variable to store the decoded message
+let decodedMessage = '';
+  // loop through the array of letters
+  for (let i = 0; i < codeArray.length; i++) {
+    // check if the current letter is a space
+    if (codeArray[i] === ' ') {
+      decodedMessage += ' ';
+    } else {
+      // loop through the morse code dictionary
+      for (let key in MORSE_TABLE) {
+        // check if the current letter matches a value in the dictionary
+        if (MORSE_TABLE[key] === codeArray[i]) {
+          // add the corresponding key (letter) to the decoded message
+          decodedMessage += key;
+        }
+      }
+    }
+  }
+  // return the decoded message
+  return decodedMessage;
 }
 
 module.exports = {
